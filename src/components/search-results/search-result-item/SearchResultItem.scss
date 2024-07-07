@@ -1,0 +1,16 @@
+.search-result-item {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #ececec;
+}
+
+.search-result-item__name {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.search-result-item__description {
+  margin: 0.5rem 0 0 0;
+  color: #666;
+}

@@ -9,7 +9,9 @@
     "allowImportingTsExtensions": true,
     "strict": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"]
   },
   "include": ["vite.config.ts", "src/**/*.ts", "src/**/*.tsx", "src/vite-env.d.ts"]
 }

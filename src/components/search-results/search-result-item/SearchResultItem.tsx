@@ -4,11 +4,11 @@ import { Movie } from '../../../types/movie';
 
 class SearchResultItem extends Component<Movie> {
   render() {
-    const { title, description } = this.props;
+    const { title, usReleaseDate } = this.props;
     return (
       <article className="search-result-item">
         <h3 className="search-result-item__name">{title}</h3>
-        <p className="search-result-item__description">{description}</p>
+        <p className="search-result-item__description">{usReleaseDate}</p>
       </article>
     );
   }

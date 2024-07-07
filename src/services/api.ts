@@ -22,7 +22,7 @@ async function fetchMovies(searchTerm: string, pageNumber = 0, pageSize = 10): P
 
   return data.movies.map((movie) => ({
     title: movie.title,
-    description: movie.usReleaseDate ?? movie.yearFrom?.toString() ?? 'No description available',
+    usReleaseDate: movie.usReleaseDate ?? movie.yearFrom?.toString() ?? 'No description available',
   }));
 }
 

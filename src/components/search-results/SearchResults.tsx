@@ -3,7 +3,7 @@ import { Component } from 'react';
 import './SearchResults.scss';
 
 interface SearchResultsProps {
-  movies: { title: string; description: string }[];
+  movies: { title: string; usReleaseDate: string }[];
 }
 
 class SearchResults extends Component<SearchResultsProps> {
@@ -12,7 +12,7 @@ class SearchResults extends Component<SearchResultsProps> {
     return (
       <div className="search-results">
         {movies.map((movie, index) => (
-          <SearchResultItem key={index} title={movie.title} description={movie.description} />
+          <SearchResultItem key={index} title={movie.title} usReleaseDate={movie.usReleaseDate} />
         ))}
       </div>
     );

@@ -4,6 +4,7 @@ import Header from '../../components/header/Header';
 import SearchResults from '../../components/search-results/SearchResults';
 import { MainPageState } from '../../types/mainPageState';
 import fetchMovies from '../../services/api';
+import ErrorBoundary from '../../components/error/ErrorBoundary';
 
 class MainPage extends Component<object, MainPageState> {
   constructor(props: object) {
@@ -23,9 +24,9 @@ class MainPage extends Component<object, MainPageState> {
   fetchResults = async (searchTerm: string) => {
     try {
       const results = await fetchMovies(searchTerm);
-      this.setState({ results });
+      this.setState({ results, error: null });
     } catch (error) {
-      console.error('Error fetching movies:', error);
+      this.setState({ error: 'Error fetching movies' });
     }
   };
 
@@ -36,13 +37,17 @@ class MainPage extends Component<object, MainPageState> {
   };
 
   render() {
+    const { results, error } = this.state;
     return (
-      <div className="container">
-        <Header onSearch={this.handleSearch} />
-        <main className="main">
-          <SearchResults movies={this.state.results} />
-        </main>
-      </div>
+      <ErrorBoundary>
+        <div className="container">
+          <Header onSearch={this.handleSearch} />
+          <main className="main">
+            {error && <div className="error-message">{error}</div>}
+            <SearchResults movies={results} />
+          </main>
+        </div>
+      </ErrorBoundary>
     );
   }
 }

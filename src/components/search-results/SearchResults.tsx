@@ -3,16 +3,16 @@ import { Component } from 'react';
 import './SearchResults.scss';
 
 interface SearchResultsProps {
-  results: { name: string; description: string }[];
+  movies: { title: string; description: string }[];
 }
 
 class SearchResults extends Component<SearchResultsProps> {
   render() {
-    const { results } = this.props;
+    const { movies } = this.props;
     return (
       <div className="search-results">
-        {results.map((result, index) => (
-          <SearchResultItem key={index} name={result.name} description={result.description} />
+        {movies.map((movie, index) => (
+          <SearchResultItem key={index} title={movie.title} description={movie.description} />
         ))}
       </div>
     );

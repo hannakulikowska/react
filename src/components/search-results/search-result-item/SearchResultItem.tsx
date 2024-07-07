@@ -1,13 +1,13 @@
 import { Component } from 'react';
 import './SearchResultItem.scss';
-import { Result } from '../../../types/result';
+import { Movie } from '../../../types/movie';
 
-class SearchResultItem extends Component<Result> {
+class SearchResultItem extends Component<Movie> {
   render() {
-    const { name, description } = this.props;
+    const { title, description } = this.props;
     return (
       <article className="search-result-item">
-        <h2 className="search-result-item__name">{name}</h2>
+        <h3 className="search-result-item__name">{title}</h3>
         <p className="search-result-item__description">{description}</p>
       </article>
     );

@@ -2,13 +2,15 @@ import { Component } from 'react';
 import './Header.scss';
 import Logo from './logo/Logo';
 import SearchForm from './search-form/SearchForm';
+import { SearchFormProps } from '../../types/searchFormProps';
 
-class Header extends Component {
+class Header extends Component<SearchFormProps> {
   render() {
     return (
       <header className="header">
         <Logo />
-        <SearchForm />
+        <h1 className="header__title">Star Trek Movies</h1>
+        <SearchForm onSearch={this.props.onSearch} />
       </header>
     );
   }

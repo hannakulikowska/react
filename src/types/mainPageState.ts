@@ -1,5 +1,6 @@
-import { Result } from './result';
+import { Movie } from './movie';
 
 export interface MainPageState {
-  results: Result[];
+  results: Movie[];
+  error: string | null;
 }

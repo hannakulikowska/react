@@ -4,13 +4,11 @@ import {
   saveSearchTermToLocalStorage,
   getSearchTermFromLocalStorage,
 } from '../../../utils/localStorage';
+import { SearchFormProps } from '../../../types/searchFormProps';
+import { SearchFormState } from '../../../types/searchFormState';
 
-interface SearchFormState {
-  searchTerm: string;
-}
-
-class SearchForm extends Component<object, SearchFormState> {
-  constructor(props: object) {
+class SearchForm extends Component<SearchFormProps, SearchFormState> {
+  constructor(props: SearchFormProps) {
     super(props);
 
     const savedSearchTerm = getSearchTermFromLocalStorage();
@@ -26,7 +24,9 @@ class SearchForm extends Component<object, SearchFormState> {
   handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const { searchTerm } = this.state;
-    saveSearchTermToLocalStorage(searchTerm);
+    const trimmedTerm = searchTerm.trim();
+    saveSearchTermToLocalStorage(trimmedTerm);
+    this.props.onSearch(trimmedTerm);
   };
 
   render() {

@@ -1,11 +1,11 @@
-import './App.css';
+import { Component } from 'react';
+import './App.scss';
+import MainPage from './view/main-page/MainPage';
 
-function App() {
-  return (
-    <>
-      <div></div>
-    </>
-  );
+class App extends Component {
+  render() {
+    return <MainPage />;
+  }
 }
 
 export default App;

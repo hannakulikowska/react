@@ -14,7 +14,10 @@ class Header extends Component<SearchFormProps> {
       <header className="header">
         <Logo />
         <h1 className="header__title">Star Trek Movies</h1>
-        <SearchForm onSearch={this.props.onSearch} />
+        <SearchForm
+          onSearch={this.props.onSearch}
+          initialSearchTerm={this.props.initialSearchTerm}
+        />
         <button className="header__error button" onClick={this.throwError}>
           Throw Error
         </button>

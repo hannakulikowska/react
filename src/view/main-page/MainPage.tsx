@@ -11,6 +11,8 @@ class MainPage extends Component<object, MainPageState> {
     super(props);
     this.state = {
       results: [],
+      searchTerm: '',
+      isLoading: false,
       error: null,
     };
     this.handleSearch = this.handleSearch.bind(this);
@@ -18,33 +20,45 @@ class MainPage extends Component<object, MainPageState> {
 
   async componentDidMount() {
     const searchTerm = localStorage.getItem('searchTerm') ?? '';
+    this.setState({ searchTerm });
     await this.fetchResults(searchTerm);
   }
 
   fetchResults = async (searchTerm: string) => {
+    this.setState({ isLoading: true });
     try {
       const results = await fetchMovies(searchTerm);
       this.setState({ results, error: null });
     } catch (error) {
       this.setState({ error: 'Error fetching movies' });
+    } finally {
+      this.setState({ isLoading: false });
     }
   };
 
   handleSearch = (searchTerm: string) => {
-    this.fetchResults(searchTerm).catch(() => {
+    const trimmedTerm = searchTerm.trim();
+    localStorage.setItem('searchTerm', trimmedTerm);
+    this.fetchResults(trimmedTerm).catch(() => {
       this.setState({ error: 'Error handling search' });
     });
   };
 
   render() {
-    const { results, error } = this.state;
+    const { results, isLoading, error } = this.state;
     return (
       <ErrorBoundary>
         <div className="container">
-          <Header onSearch={this.handleSearch} />
+          <Header onSearch={this.handleSearch} initialSearchTerm={this.state.searchTerm} />
           <main className="main">
             {error && <div className="error-message">{error}</div>}
-            <SearchResults movies={results} />
+            {isLoading ? (
+              <div className="loader-wrapper">
+                <div className="loader"></div>
+              </div>
+            ) : (
+              <SearchResults movies={results} />
+            )}
           </main>
         </div>
       </ErrorBoundary>

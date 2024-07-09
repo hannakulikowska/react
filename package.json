@@ -12,6 +12,7 @@
     "preview": "vite preview",
     "format": "prettier --write .",
     "ci:format": "prettier --check .",
+    "format:fix": "npm run format",
     "prepare": "husky",
     "pre-commit": "lint-staged"
   },

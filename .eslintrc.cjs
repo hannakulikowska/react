@@ -26,9 +26,11 @@ module.exports = {
     "prettier",
     "import",
     "react-refresh",
+    "react-compiler"
   ],
   rules: {
     "prettier/prettier": "error",
+    "react-compiler/react-compiler": "error",
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },

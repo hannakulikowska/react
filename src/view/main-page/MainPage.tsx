@@ -4,7 +4,6 @@ import Header from '../../components/header/Header';
 import SearchResults from '../../components/search-results/SearchResults';
 import { MainPageState } from '../../types/mainPageState';
 import fetchMovies from '../../services/api';
-import ErrorBoundary from '../../components/error/ErrorBoundary';
 
 class MainPage extends Component<object, MainPageState> {
   constructor(props: object) {
@@ -15,7 +14,6 @@ class MainPage extends Component<object, MainPageState> {
       isLoading: false,
       error: null,
     };
-    this.handleSearch = this.handleSearch.bind(this);
   }
 
   async componentDidMount() {
@@ -39,29 +37,35 @@ class MainPage extends Component<object, MainPageState> {
   handleSearch = (searchTerm: string) => {
     const trimmedTerm = searchTerm.trim();
     localStorage.setItem('searchTerm', trimmedTerm);
-    this.fetchResults(trimmedTerm).catch(() => {
-      this.setState({ error: 'Error handling search' });
-    });
+  };
+
+  triggerError = () => {
+    this.setState({ error: 'Error handling search' });
   };
 
   render() {
+    if (this.state.error) {
+      throw new Error('Test error');
+    }
     const { results, isLoading, error } = this.state;
     return (
-      <ErrorBoundary>
-        <div className="container">
-          <Header onSearch={this.handleSearch} initialSearchTerm={this.state.searchTerm} />
-          <main className="main">
-            {error && <div className="error-message">{error}</div>}
-            {isLoading ? (
-              <div className="loader-wrapper">
-                <div className="loader"></div>
-              </div>
-            ) : (
-              <SearchResults movies={results} />
-            )}
-          </main>
-        </div>
-      </ErrorBoundary>
+      <div className="container">
+        <Header
+          onSearch={this.handleSearch}
+          initialSearchTerm={this.state.searchTerm}
+          triggerError={this.triggerError}
+        />
+        <main className="main">
+          {error && <div className="error-message">{error}</div>}
+          {isLoading ? (
+            <div className="loader-wrapper">
+              <div className="loader"></div>
+            </div>
+          ) : (
+            <SearchResults movies={results} />
+          )}
+        </main>
+      </div>
     );
   }
 }

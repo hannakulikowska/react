@@ -4,11 +4,11 @@ import Logo from './logo/Logo';
 import SearchForm from './search-form/SearchForm';
 import { SearchFormProps } from '../../types/searchFormProps';
 
-class Header extends Component<SearchFormProps> {
-  throwError = () => {
-    throw new Error('Test error');
-  };
+interface HeaderProps extends SearchFormProps {
+  triggerError: () => void;
+}
 
+class Header extends Component<HeaderProps> {
   render() {
     return (
       <header className="header">
@@ -18,7 +18,7 @@ class Header extends Component<SearchFormProps> {
           onSearch={this.props.onSearch}
           initialSearchTerm={this.props.initialSearchTerm}
         />
-        <button className="header__error button" onClick={this.throwError}>
+        <button className="header__error button" onClick={this.props.triggerError}>
           Throw Error
         </button>
       </header>

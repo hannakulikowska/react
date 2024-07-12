@@ -9,8 +9,12 @@ export interface Movie {
   usReleaseDate: string;
 }
 
-async function fetchMovies(): Promise<Movie[]> {
+async function fetchMovies(searchTerm?: string): Promise<Movie[]> {
   const url = new URL(`${BASE_URL}`);
+
+  if (searchTerm) {
+    url.searchParams.append('title', searchTerm);
+  }
 
   const response: Response = await fetch(url.toString());
 

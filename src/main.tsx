@@ -6,7 +6,8 @@ import ErrorBoundary from './components/error/ErrorBoundary';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ErrorBoundary>
+    <ErrorBoundary
+      fallback={<p style={{ textAlign: 'center' }}>Something went wrong. Reload the page.</p>}>
       <App />
     </ErrorBoundary>
   </React.StrictMode>,

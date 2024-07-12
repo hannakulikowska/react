@@ -1,6 +1,7 @@
 import { Component, ReactNode } from 'react';
 
 interface ErrorBoundaryProps {
+  fallback: ReactNode;
   children: ReactNode;
 }
 
@@ -22,11 +23,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
 
   render() {
     if (this.state.hasError) {
-      return (
-        <h3 className="error" style={{ textAlign: 'center' }}>
-          Something went wrong. Reload the page.
-        </h3>
-      );
+      return this.props.fallback;
     }
 
     return this.props.children;

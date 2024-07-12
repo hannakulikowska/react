@@ -1,9 +1,7 @@
-import { Component } from 'react';
+import './Logo.scss';
 
-class Logo extends Component {
-  render() {
-    return <img className="header__logo logo" src="/react.svg" alt="Logo" />;
-  }
-}
+const Logo = () => {
+  return <img className="header__logo logo" src="/react.svg" alt="Logo" />;
+};
 
 export default Logo;

@@ -52,6 +52,7 @@ module.exports = {
       },
     ],
     "@typescript-eslint/no-explicit-any": "error",
+    "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
   },
   settings: {

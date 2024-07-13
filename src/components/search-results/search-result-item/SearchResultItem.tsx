@@ -1,17 +1,13 @@
-import { Component } from 'react';
 import './SearchResultItem.scss';
-import { Movie } from '../../../types/movie';
+import { Movie } from '../../../services/fetchMovies';
 
-class SearchResultItem extends Component<Movie> {
-  render() {
-    const { title, usReleaseDate } = this.props;
-    return (
-      <article className="search-result-item">
-        <h3 className="search-result-item__name">{title}</h3>
-        <p className="search-result-item__description">{usReleaseDate}</p>
-      </article>
-    );
-  }
-}
+const SearchResultItem: React.FC<Movie> = ({ title, usReleaseDate }) => {
+  return (
+    <article className="search-result-item">
+      <h3 className="search-result-item__name">{title}</h3>
+      <p className="search-result-item__description">{usReleaseDate}</p>
+    </article>
+  );
+};
 
 export default SearchResultItem;

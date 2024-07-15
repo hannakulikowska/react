@@ -1,0 +1,11 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx lint-staged
+
+if [ $? -eq 0 ]; then
+  npm run lint:fix && npm run format && npm test
+else
+  echo "lint-staged failed. Commit aborted."
+  exit 1
+fi
